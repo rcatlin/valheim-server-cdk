@@ -1,0 +1,11 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+build/*.tar.gz
+assets/steamcmd_linux.tar.gz
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+

@@ -1,0 +1,8 @@
+{
+    "worldName": "GoVikingGo",
+    "displayName": "Go Viking Go!",
+    "password": "iceiceviking",
+    "keyPairName": "ENTER-YOUR-KEYPAIR-HERE",
+    "instanceClass": "m4",
+    "instanceSize": "xlarge"
+}

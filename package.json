@@ -1,0 +1,35 @@
+{
+  "name": "valheim-server-cdk",
+  "version": "0.1.0",
+  "bin": {
+    "valheim-server-cdk": "bin/valheim-server-cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "clean": "rm -f ./build/*",
+    "getsteamcmd": "cd assets && wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz",
+    "bootstrap": "cdk bootstrap",
+    "deploy": "npm run templates && npm run assets && cdk deploy",
+    "assets": "cd ./assets && tar cvzf ../build/assets.tar.gz *",
+    "templates": "node ./js/render-templates.js"
+  },
+  "devDependencies": {
+    "aws-cdk": "1.89.0",
+    "@aws-cdk/assert": "1.89.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^1.89.0",
+    "@aws-cdk/aws-iam": "^1.89.0",
+    "@aws-cdk/core": "1.89.0",
+    "handlebars": "^4.7.7"
+  }
+}
