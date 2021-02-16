@@ -3,7 +3,12 @@
 *.d.ts
 node_modules
 build/*.tar.gz
+
+# Downloaded asset(s)
 assets/steamcmd_linux.tar.gz
+
+# Templated asset(s)
+assets/custom_start_valheim.sh
 
 # CDK asset staging directory
 .cdk.staging
