@@ -10,7 +10,6 @@
     "test": "jest",
     "cdk": "cdk",
     "clean": "rm -f ./build/*",
-    "getsteamcmd": "cd assets && wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz",
     "bootstrap": "cdk bootstrap",
     "deploy": "npm run templates && npm run assets && cdk deploy",
     "assets": "cd ./assets && chmod +x ./*.sh && tar cvzf ../build/assets.tar.gz *",

@@ -99,15 +99,9 @@ export class ValheimServerCdkStack extends cdk.Stack {
             '/home/viking/assets/',
             path.join(__dirname, '../build/assets.tar.gz') // assets must be a tar or zip
           ),
-
-          // Extract SteamCMD from assets
-          InitCommand.argvCommand([
-            'tar',
-            'xvf',
-            '/home/viking/assets/steamcmd_linux.tar.gz',
-            '-C',
-            '/home/viking/Steam/'
-          ]),
+          
+          // Download lastest SteamCMD
+          InitSource.fromUrl('/home/viking/Steam/', 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz'),
 
           // Install Valheim Server using SteamCMD
           InitCommand.argvCommand([
