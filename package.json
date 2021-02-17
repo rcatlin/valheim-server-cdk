@@ -13,7 +13,8 @@
     "bootstrap": "cdk bootstrap",
     "deploy": "npm run templates && npm run assets && cdk deploy",
     "assets": "cd ./assets && chmod +x ./*.sh && tar cvzf ../build/assets.tar.gz *",
-    "templates": "node -e \"require('./js/render-templates.js').renderAll();\""
+    "templates": "node -e \"require('./js/render-templates.js').renderAll();\"",
+    "destroy": "cdk destroy"
   },
   "devDependencies": {
     "aws-cdk": "1.89.0",
