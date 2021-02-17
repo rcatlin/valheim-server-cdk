@@ -2,19 +2,28 @@
 
 An "easy" way to setup the infrastructure and a running valheim server (with manual backup capabilities) on AWS!
 
-## tl;dr
+# DISCLAIMER
+
+**This work is in NO WAY affiliated with Amazon or IronGate.**
+
+**Use this code at your discretion.**
+
+Launching EC2 instances in AWS **cost real money** and I am in no way responsible for costs accrued.
+
+
+# tl;dr
 
 * have aws account
 * have/add iam role and keypair in aws account
-* have aws cli
+* have aws cli isntalled and configured locally
 * checkout code
 * modify `user-config.json`
-* run "`npm install && cdk bootstrap && npm run getsteamcmd && npm run deploy`"
+* run "`npm install && npm run bootstrap && npm run getsteamcmd && npm run deploy`"
 * wait then connect and play
 
 Note: iam role is for using aws cli; keypair is for cdk deployment
 
-## Assumptions
+# Assumptions
 
 * You have an AWS account.
 * You can execute via command-line:
@@ -101,7 +110,7 @@ Say you want to change the password...
 * Run `npm run deploy` - this will rerender templates, tarball assets, and deploy any changes to your stack.
 
 
-## Backing Up World Files
+# Backing Up World Files
 
 As of this writing, the world files on Linux are located on the EC2 instance at `~/.config/unity3d/IronGate/Valheim/world/`
 
