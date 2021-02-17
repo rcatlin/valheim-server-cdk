@@ -25,12 +25,14 @@ Note: iam role is for using aws cli; keypair is for cdk deployment
   * `cdk` (AWS CDK CLI)
     * `npm install -g aws-cdk`
 * You have configured your local AWS credentials
-  * You can run `aws configure`
+  * You can run `aws configure` ([Quick Configure wiki](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html))
 
 ## Setup
 
 * In AWS, create an IAM role
 * In AWS, create a KeyPair (remember the name)
+  * You will need the key/pair when you setting up your local aws settings via `aws configure`
+* Configured local `aws` CLI by running `aws configure`
 * Clone this repository
 * Edit `user-config.json` to your preferences
   * Change to your liking
