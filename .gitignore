@@ -3,6 +3,7 @@
 *.d.ts
 node_modules
 build/*.tar.gz
+!js/*.js
 
 # Downloaded asset(s)
 assets/steamcmd_linux.tar.gz
