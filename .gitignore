@@ -9,6 +9,7 @@ assets/steamcmd_linux.tar.gz
 
 # Templated asset(s)
 assets/custom_start_valheim.sh
+assets/stop_backup_start.sh
 
 # CDK asset staging directory
 .cdk.staging

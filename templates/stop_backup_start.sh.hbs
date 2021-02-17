@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Stopping valheimserver..." \
+&& sudo systemctl stop valheimserver \
+&& echo "Backing up worlds folder..." \
+&& sudo aws s3 sync "/home/viking/.config/unity3d/IronGate/Valheim/worlds/" "s3://{{backupS3BucketName}}" --no-follow-symlinks \
+&& echo "Starting valheimserver..." \
+&& sudo systemctl start valheimserver

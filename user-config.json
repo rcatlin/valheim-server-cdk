@@ -4,5 +4,6 @@
     "password": "iceiceviking",
     "keyPairName": "ENTER-YOUR-KEYPAIR-HERE",
     "instanceClass": "m4",
-    "instanceSize": "xlarge"
+    "instanceSize": "xlarge",
+    "backupS3BucketName": "ENTER-YOUR-UNIQUE-BACKUP-BUCKET-NAME-HERE"
 }

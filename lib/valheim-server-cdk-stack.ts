@@ -5,6 +5,7 @@ import * as cdk from '@aws-cdk/core';
 import {
   AmazonLinuxGeneration,
   AmazonLinuxImage,
+  CfnEC2Fleet,
   CfnEIP,
   CfnEIPAssociation,
   CloudFormationInit,
@@ -21,11 +22,14 @@ import {
   SubnetType,
   Vpc
 } from '@aws-cdk/aws-ec2';
+import * as s3 from '@aws-cdk/aws-s3';
+import * as iam from '@aws-cdk/aws-iam';
 
 const { 
   keyPairName,
   instanceClass,
-  instanceSize
+  instanceSize,
+  backupS3BucketName
 } = JSON.parse(fs.readFileSync(path.join(__dirname, '../user-config.json'), 'utf8'));
 
 export class ValheimServerCdkStack extends cdk.Stack {
@@ -99,7 +103,7 @@ export class ValheimServerCdkStack extends cdk.Stack {
             '/home/viking/assets/',
             path.join(__dirname, '../build/assets.tar.gz') // assets must be a tar or zip
           ),
-          
+
           // Download lastest SteamCMD
           InitSource.fromUrl('/home/viking/Steam/', 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz'),
 
@@ -118,6 +122,12 @@ export class ValheimServerCdkStack extends cdk.Stack {
 
           // Copy server start script from assets
           InitCommand.argvCommand(['cp', '/home/viking/assets/custom_start_valheim.sh', '/home/viking/valheimserver/']),
+
+          // Copy backup script for ec2-user (must be changed if default user is not "ec2-user")
+          InitCommand.argvCommand(['cp', '/home/viking/assets/stop_backup_start.sh', '/home/ec2-user/']),
+
+          // Allow ec2-user to run backup script
+          InitCommand.argvCommand(['chown', '-h', 'ec2-user:ec2-user', '/home/ec2-user/stop_backup_start.sh']),
 
           // Copy check log script from assets
           InitCommand.argvCommand(['cp', '/home/viking/assets/check_log.sh', '/home/viking/valheimserver/']),
@@ -162,5 +172,12 @@ export class ValheimServerCdkStack extends cdk.Stack {
       eip: eip.ref,
       instanceId: instance.instanceId
     });
+
+    /* S3 for World backup (requires manually running script) */
+    const backupS3 = new s3.Bucket(this, 'Backup Bucket', {
+      bucketName: backupS3BucketName,
+      versioned: true
+    });
+    backupS3.grantReadWrite(instance);
   }
 }

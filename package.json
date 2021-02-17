@@ -13,7 +13,7 @@
     "bootstrap": "cdk bootstrap",
     "deploy": "npm run templates && npm run assets && cdk deploy",
     "assets": "cd ./assets && chmod +x ./*.sh && tar cvzf ../build/assets.tar.gz *",
-    "templates": "node ./js/render-templates.js"
+    "templates": "node -e \"require('./js/render-templates.js').renderAll();\""
   },
   "devDependencies": {
     "aws-cdk": "1.89.0",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@aws-cdk/aws-ec2": "^1.89.0",
     "@aws-cdk/aws-iam": "^1.89.0",
+    "@aws-cdk/aws-s3": "^1.89.0",
     "@aws-cdk/core": "1.89.0",
     "handlebars": "^4.7.7"
   }
