@@ -15,7 +15,7 @@ Launching EC2 instances in AWS **cost real money** and I am in no way responsibl
 
 * have aws account
 * have/add iam role and keypair in aws account
-* have aws cli isntalled and configured locally
+* have aws cli installed and configured locally
 * checkout code
 * modify `user-config.json`
 * run "`npm install && npm run bootstrap && npm run deploy`"
