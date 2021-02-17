@@ -18,7 +18,7 @@ Launching EC2 instances in AWS **cost real money** and I am in no way responsibl
 * have aws cli isntalled and configured locally
 * checkout code
 * modify `user-config.json`
-* run "`npm install && npm run bootstrap && npm run getsteamcmd && npm run deploy`"
+* run "`npm install && npm run bootstrap && npm run deploy`"
 * wait then connect and play
 
 Note: iam role is for using aws cli; keypair is for cdk deployment
