@@ -81,7 +81,9 @@ The `user-config.json` has your setup preferences.
 * `instanceSize` - AWS EC2 instance size
 * `backupS3BucketName` - GLOBALLY UNIQUE S3 bucket name where your worlds can be backed-up by running the `stop_backup_start.sh` script
 
-**Checkout the [AWS Instance Types](https://aws.amazon.com/ec2/instance-types) to see a full-list of types and sizes.** For example, `m4.xlarge` has an instance class of `m4` and size of `xlarge`.
+**Checkout the [AWS Instance Types](https://aws.amazon.com/ec2/instance-types) to see a full-list of types and sizes.** For example, `t2.medium` has an instance class of `t2` and size of `medium`.
+
+If you run into performance/CPU bottle necks try upping the instance class (`t3`, `m4`, etc) and keep in mind they're most costly.
 
 **Example:**
 ```

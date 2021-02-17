@@ -3,7 +3,7 @@
     "displayName": "Go Viking Go!",
     "password": "iceiceviking",
     "keyPairName": "ENTER-YOUR-KEYPAIR-HERE",
-    "instanceClass": "m4",
-    "instanceSize": "xlarge",
+    "instanceClass": "t2",
+    "instanceSize": "medium",
     "backupS3BucketName": "ENTER-YOUR-UNIQUE-BACKUP-BUCKET-NAME-HERE"
 }
