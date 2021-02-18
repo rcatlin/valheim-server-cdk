@@ -110,7 +110,7 @@ Note: `cdk bootstrap` **must** be ran once on the AWS Account so assets can be p
 * Hit the `y` key to accept the changes
 * Wait for a successful CloudFormation stack creation...
 * Connect and play!
-* `npm run destroy` - Only if you want to **destroy** (aka delete) everything (except s3 assets) with an iron hammer! 
+* `npm run destroy` - Only if you want to **destroy** (aka delete) everything (except s3 buckets and elastic ips) with an iron hammer! 
 
 Notes: 
 * s3 assets must be manually deleted)
@@ -155,6 +155,11 @@ The S3 bucket is automatically setup to be "versioned" meaning previous saves ca
 
 There is no current script to restore old world files. This must be done manually.
 
+# Destroy
+
+You can destroy the stack and most resources by running `npm run destroy`.
+
+This command will not result in the deletion of the S3 bucket (backup folder) or the Elastic IP (public ip).
 
 # Possible Future Improvements (if odin wills)
 
