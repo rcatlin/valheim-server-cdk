@@ -5,13 +5,14 @@ import * as cdk from '@aws-cdk/core';
 import {
   AmazonLinuxGeneration,
   AmazonLinuxImage,
-  CfnEC2Fleet,
   CfnEIP,
   CfnEIPAssociation,
   CloudFormationInit,
   InitCommand,
   InitConfig,
   InitPackage,
+  InitService,
+  InitServiceRestartHandle,
   InitSource,
   InitUser,
   Instance,
@@ -74,6 +75,10 @@ export class ValheimServerCdkStack extends cdk.Stack {
 
     /* Machine Image */
     const machineImage = new AmazonLinuxImage({ generation: AmazonLinuxGeneration.AMAZON_LINUX_2 });
+
+    // Create service restart handle to trigger Valheim restarts
+    // when certain commands/changes are performed.
+    const valheimHandle = new InitServiceRestartHandle();
 
     /* CloudFormation Initialization */
     const init = CloudFormationInit.fromConfigSets({
@@ -139,13 +144,10 @@ export class ValheimServerCdkStack extends cdk.Stack {
           InitCommand.argvCommand(['chown', '-Rh', 'viking:viking', '/home/viking/']),
 
           // Reload daemons
-          InitCommand.argvCommand(['systemctl', 'daemon-reload']),
+          InitCommand.argvCommand(['systemctl', 'daemon-reload'], { serviceRestartHandles: [ valheimHandle ]}),
 
-          // Start Valheim!
-          InitCommand.argvCommand(['systemctl', 'start', 'valheimserver']),
-
-          // Ensure service starts on reboot
-          InitCommand.argvCommand(['systemctl', 'enable', 'valheimserver'])
+          // Start Valheim and ensure it starts on boot
+          InitService.enable('valheimserver', { serviceRestartHandle: valheimHandle })
         ])
       }
     });
