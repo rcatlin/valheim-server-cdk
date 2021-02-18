@@ -1,4 +1,4 @@
-# Valhdiem Server with CDK (ALPHA)
+# Valhdiem Server with CDK
 
 An "easy" way to setup the infrastructure and a running valheim server (with manual backup capabilities) on AWS!
 
