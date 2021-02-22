@@ -16,6 +16,8 @@ import {
   InitSource,
   InitUser,
   Instance,
+  InstanceClass,
+  InstanceSize,
   InstanceType,
   Peer,
   Port,
@@ -25,15 +27,8 @@ import {
 } from '@aws-cdk/aws-ec2';
 import * as s3 from '@aws-cdk/aws-s3';
 
-const { 
-  keyPairName,
-  instanceClass,
-  instanceSize,
-  backupS3BucketName
-} = JSON.parse(fs.readFileSync(path.join(__dirname, '../user-config.json'), 'utf8'));
-
 export class ValheimServerCdkStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.App, id: string, props: iValheimServerCdkStackProps) {
     super(scope, id, props);
 
     /* VPC  */
@@ -162,9 +157,9 @@ export class ValheimServerCdkStack extends cdk.Stack {
       vpc,
       machineImage,
       securityGroup,
-      instanceType: InstanceType.of(instanceClass, instanceSize),
+      instanceType: InstanceType.of(props.instanceClass, props.instanceSize),
       vpcSubnets: { subnetType: SubnetType.PUBLIC },
-      keyName: keyPairName
+      keyName: props.keyPairName
     });
 
     /* Elastic IP Address */
@@ -176,9 +171,16 @@ export class ValheimServerCdkStack extends cdk.Stack {
 
     /* S3 for World backup (requires manually running script) */
     const backupS3 = new s3.Bucket(this, 'Backup Bucket', {
-      bucketName: backupS3BucketName,
+      bucketName: props.backupS3BucketName,
       versioned: true
     });
     backupS3.grantReadWrite(instance);
   }
+}
+
+interface iValheimServerCdkStackProps extends cdk.StackProps {
+  keyPairName: string;
+  instanceClass: InstanceClass;
+  instanceSize: InstanceSize;
+  backupS3BucketName: string;
 }
