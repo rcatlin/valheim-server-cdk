@@ -161,6 +161,14 @@ You can destroy the stack and most resources by running `npm run destroy`.
 
 This command will not result in the deletion of the S3 bucket (backup folder) or the Elastic IP (public ip).
 
+### Running Multiple Servers
+
+Server stacks running a single EC2 instance are identified by the unique `worldName` defined in `user-config.json`.
+
+Different world names will cause unique stack to be created.
+
+I would recommend recloning this repository with a newly modified user config to launch additional servers on the same AWS account+region.
+
 # Possible Future Improvements (if odin wills)
 
 * More commands for maintenance, control, admin/ban lists, etc
