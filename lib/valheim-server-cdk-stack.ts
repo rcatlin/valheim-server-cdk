@@ -24,7 +24,6 @@ import {
   Vpc
 } from '@aws-cdk/aws-ec2';
 import * as s3 from '@aws-cdk/aws-s3';
-import * as iam from '@aws-cdk/aws-iam';
 
 const { 
   keyPairName,
