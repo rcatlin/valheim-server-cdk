@@ -1,6 +1,6 @@
-# Valhdiem Server with CDK
+# Valhiem Server with CDK
 
-An "easy" way to setup the infrastructure and a running valheim server (with manual backup capabilities) on AWS!
+An "easy" way to setup the infrastructure and a running Valheim server (with manual backup capabilities) on AWS!
 
 # DISCLAIMER
 
