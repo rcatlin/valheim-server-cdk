@@ -169,6 +169,10 @@ Different world names will cause unique stack to be created.
 
 I would recommend recloning this repository with a newly modified user config to launch additional servers on the same AWS account+region.
 
+# Github Actions
+
+Anyone added as a collaborator can trigger github actions. The update and backup github actions are set to :workflow_dispatch, and can be triggered manually or also by a POST request to the action route, with proper authentication.
+
 # Possible Future Improvements (if odin wills)
 
 * More commands for maintenance, control, admin/ban lists, etc
