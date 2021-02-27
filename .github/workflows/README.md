@@ -31,4 +31,6 @@ https://docs.github.com/en/actions/reference/encrypted-secrets
 **Required** A single instance id or a list of ids seperated with new lines.
 
 ## TODO
-You could have additional backup/update YAML workflow files per server, and slightly tweak the secret names in each to manage different servers.
+ - Could have additional backup/update YAML workflow files per server, and slightly tweak the secret names and add additional secrets to the repository to manage different servers.
+
+ - Could create a workflow for the initial deploy of the server as well.
