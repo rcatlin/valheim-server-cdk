@@ -10,7 +10,8 @@ test('EC2 Instance Created', () => {
     keyPairName: 'foo-key-pair-name',
     instanceSize: InstanceSize.LARGE,
     instanceClass: InstanceClass.T2,
-    backupS3BucketName: 'foo-backup-bucket-name'
+    backupS3BucketName: 'foo-backup-bucket-name',
+    worldName: 'FooWorldName'
   });
   // THEN
   expectCDK(stack).to(haveResource("AWS::EC2::Instance"));
