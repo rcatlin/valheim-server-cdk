@@ -7,11 +7,11 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "npm run templates && npm run assets && jest",
+    "test": "jest",
     "cdk": "cdk",
     "clean": "rm -f ./build/* && tsc --build --clean",
     "bootstrap": "cdk bootstrap",
-    "deploy": "npm run templates && npm run assets && cdk deploy",
+    "deploy": "cdk deploy",
     "assets": "cd ./assets && chmod +x ./*.sh && tar cvzf ../build/assets.tar.gz *",
     "templates": "node -e \"require('./js/render-templates.js').renderAll();\"",
     "destroy": "cdk destroy"
