@@ -17,8 +17,9 @@ Launching EC2 instances in AWS **cost real money** and I am in no way responsibl
 * have/add iam role and keypair in aws account
 * have aws cli installed and configured locally
 * checkout code
+* Run initialize: `make init`
 * modify `user-config.json`
-* run "`npm install && npm run bootstrap && npm run deploy`"
+* Run deploy: `make deploy`
 * wait then connect and play
 
 Note: iam role is for using aws cli; keypair is for cdk deployment
@@ -37,10 +38,9 @@ You will not need to install any tools using CloudShell. :D
   * you'll also need to enter a recommended region in the world to deploy. Pick one nearest you!
 * `git clone https://github.com/rcatlin/valheim-server-cdk.git`
 * `cd valheim-server-cdk`
-* `npm install`
-* `npm run templates && npm run assets`
-* `npm bootstrap`
-* `npm run deploy`
+* `make init`
+* Edit your `user-config.json`
+* `make deploy`
 * Enter `y` when asked and hit enter
 * Wait for successful creation and setup of the server
 * Check that the EC2 instance and valheimserver is running (`sudo systemctl status valheimserver` on EC@ instance)
@@ -102,15 +102,13 @@ If you run into performance/CPU bottle necks try upping the instance class (`t3`
 
 Note: `cdk bootstrap` **must** be ran once on the AWS Account so assets can be properly deployed using the CDK toolkit stack.
 
-* `npm install`
-* `npm run templates && npm run assets`
-* `npm run bootstrap` - only need to run once
+* `make init`
 * Edit `user-config.json` with your preferences!
-* `npm run deploy` - run as many times as you want per code changes
+* `make deploy` - run as many times as you want per code or config changes
 * Hit the `y` key to accept the changes
 * Wait for a successful CloudFormation stack creation...
 * Connect and play!
-* `npm run destroy` - Only if you want to **destroy** (aka delete) everything (except s3 buckets and elastic ips) with an iron hammer! 
+* `make destroy` - Only if you want to **destroy** (aka delete) everything (except s3 buckets and elastic ips) with an iron hammer! 
 
 Notes: 
 * s3 assets must be manually deleted)
@@ -134,7 +132,7 @@ Say you want to change the password...
 
 * Edit `user-config.json` and change the password
 * Remember, changing the `worldName` creates a **NEW** world file on the server. Your building(s) will **NOT** be in the new world.
-* Run `npm run deploy` - this will rerender templates, tarball assets, and deploy any changes to your stack.
+* Run `make deploy` - this will rerender templates, tarball assets, and deploy any changes to your stack.
 
 
 # Backing Up World Files
