@@ -27,6 +27,8 @@ import {
 } from '@aws-cdk/aws-ec2';
 import * as s3 from '@aws-cdk/aws-s3';
 
+const USER_VIKING_WORLDS_FOLDER_PATH = '/home/viking/.config/unity3d/IronGate/Valheim/worlds/';
+
 export class ValheimServerCdkStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props: iValheimServerCdkStackProps) {
     super(scope, id, props);
@@ -75,6 +77,26 @@ export class ValheimServerCdkStack extends cdk.Stack {
     const valheimHandle = new InitServiceRestartHandle();
 
     /* CloudFormation Initialization */
+    let restoreFromS3Command;
+    if (props.existingBucket) {
+      const src = path.join('s3://', props.backupS3BucketName, '/'),
+        dest = path.join(USER_VIKING_WORLDS_FOLDER_PATH, '/');
+      restoreFromS3Command = InitCommand.argvCommand([
+        'aws',
+        's3',
+        'cp',
+        src,
+        dest,
+        '--include',
+        `"${props.worldName}.*"`,
+        '--exclude',
+        '"*.old"',
+        '--recursive'
+      ]);
+    } else {
+      restoreFromS3Command = InitCommand.argvCommand(['echo "World file restoration skipped: new bucket."']);
+    }
+
     const init = CloudFormationInit.fromConfigSets({
       configSets: {
         default: ['yumPreinstall', 'config']
@@ -131,6 +153,9 @@ export class ValheimServerCdkStack extends cdk.Stack {
           // Copy check log script from assets
           InitCommand.argvCommand(['cp', '/home/viking/assets/check_log.sh', '/home/viking/valheimserver/']),
 
+          // Conditionally restore world from S3 Bucket 
+          restoreFromS3Command,
+
           // Copy systemd service configuration
           InitCommand.argvCommand(['cp', '/home/viking/assets/valheimserver.service', '/etc/systemd/system/']),
 
@@ -170,10 +195,15 @@ export class ValheimServerCdkStack extends cdk.Stack {
     });
 
     /* S3 for World backup (requires manually running script) */
-    const backupS3 = new s3.Bucket(this, 'Backup Bucket', {
-      bucketName: props.backupS3BucketName,
-      versioned: true
-    });
+    let backupS3;
+    if (props.existingBucket) {
+      backupS3 = s3.Bucket.fromBucketName(this, 'Backup Bucket', props.backupS3BucketName);
+    } else {
+      backupS3 = new s3.Bucket(this, 'Backup Bucket', {
+        bucketName: props.backupS3BucketName,
+        versioned: true
+      });
+    }
     backupS3.grantReadWrite(instance);
   }
 }
@@ -183,4 +213,6 @@ interface iValheimServerCdkStackProps extends cdk.StackProps {
   instanceClass: InstanceClass;
   instanceSize: InstanceSize;
   backupS3BucketName: string;
+  worldName: string;
+  existingBucket?: boolean;
 }
