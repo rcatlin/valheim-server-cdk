@@ -11,7 +11,7 @@ init: install assets
 	npm run bootstrap
 
 deploy: assets
-	npm run bootstrap
+	npm run deploy
 
 destroy: 
 	npm run destroy
