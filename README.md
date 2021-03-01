@@ -80,6 +80,8 @@ The `user-config.json` has your setup preferences.
 * `instanceClass` - AWS EC2 instance class
 * `instanceSize` - AWS EC2 instance size
 * `backupS3BucketName` - GLOBALLY UNIQUE S3 bucket name where your worlds can be backed-up by running the `stop_backup_start.sh` script
+* `existingBucket` - OPTIONAL: `backupS3BucketName` is an existing bucket (make sure you have "Versioning" enabled in your bucket to be able to recover after possible corruptions).
+  * NOTE: if set to `true` then an attempt will be made to restore the world file (based on the provided `worldName` from the existing S3 bucket)
 
 **Checkout the [AWS Instance Types](https://aws.amazon.com/ec2/instance-types) to see a full-list of types and sizes.** For example, `t2.medium` has an instance class of `t2` and size of `medium`.
 
