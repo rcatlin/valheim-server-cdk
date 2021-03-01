@@ -80,6 +80,8 @@ The `user-config.json` has your setup preferences.
 * `instanceClass` - AWS EC2 instance class
 * `instanceSize` - AWS EC2 instance size
 * `backupS3BucketName` - GLOBALLY UNIQUE S3 bucket name where your worlds can be backed-up by running the `stop_backup_start.sh` script
+* `existingBucket` - OPTIONAL: The `backupS3BucketName` is an **existing** S3 bucket
+* `eipInstanceId` - OPTIONAL: Utilize an existing EIP (prevents loss of EIP when stack is destroyed)
 
 **Checkout the [AWS Instance Types](https://aws.amazon.com/ec2/instance-types) to see a full-list of types and sizes.** For example, `t2.medium` has an instance class of `t2` and size of `medium`.
 
@@ -94,7 +96,9 @@ If you run into performance/CPU bottle necks try upping the instance class (`t3`
     "keyPairName": "your-keypair-name-here",
     "instanceClass": "m4",
     "instanceSize": "xlarge",
-    "backupS3BucketName": "your-backup-bucket-name"
+    "backupS3BucketName": "your-backup-bucket-name"j,
+    "existingBucket": true,  // OPTIONAL
+    "eipInstanceId": "eipalloc-XXXXXX" // OPTIONAL
 }
 ```
 

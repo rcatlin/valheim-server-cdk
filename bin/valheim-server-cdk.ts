@@ -22,4 +22,6 @@ interface iUserConfig {
     instanceSize: InstanceSize;
     backupS3BucketName: string;
     worldName: string;
+    eipInstanceId: string;
+    existingBucket: boolean;
 }

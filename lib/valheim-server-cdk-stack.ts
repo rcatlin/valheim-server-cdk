@@ -163,17 +163,24 @@ export class ValheimServerCdkStack extends cdk.Stack {
     });
 
     /* Elastic IP Address */
-    const eip = new CfnEIP(this ,'Server IP');
+    const eip = new CfnEIP(this, 'Server IP', {
+      instanceId: props.eipInstanceId // OPTIONAL: existing eip instance id
+    });
     new CfnEIPAssociation(this, 'Elastic IP Association', {
       eip: eip.ref,
       instanceId: instance.instanceId
     });
 
     /* S3 for World backup (requires manually running script) */
-    const backupS3 = new s3.Bucket(this, 'Backup Bucket', {
-      bucketName: props.backupS3BucketName,
-      versioned: true
-    });
+    let backupS3;
+    if (props.existingBucket) {
+      backupS3 = s3.Bucket.fromBucketName(this, 'Backup Bucket', props.backupS3BucketName);
+    } else {
+      backupS3 = new s3.Bucket(this, 'Backup Bucket', {
+        bucketName: props.backupS3BucketName,
+        versioned: true
+      });
+    }
     backupS3.grantReadWrite(instance);
   }
 }
@@ -183,4 +190,6 @@ interface iValheimServerCdkStackProps extends cdk.StackProps {
   instanceClass: InstanceClass;
   instanceSize: InstanceSize;
   backupS3BucketName: string;
+  eipInstanceId?: string;
+  existingBucket?: boolean;
 }
