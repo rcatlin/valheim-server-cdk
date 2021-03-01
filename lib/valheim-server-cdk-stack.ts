@@ -35,6 +35,7 @@ export class ValheimServerCdkStack extends cdk.Stack {
 
     /* VPC  */
     const vpc = new Vpc(this, 'VPC', {
+      maxAzs: 1
     });
 
     /* Security Group */
