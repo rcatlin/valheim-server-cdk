@@ -13,13 +13,16 @@ new ValheimServerCdkStack(app, `${userConfig.worldName}ValheimServerCdkStack`, {
     keyPairName: userConfig.keyPairName,
     instanceClass: userConfig.instanceClass,
     instanceSize: userConfig.instanceSize,
-    backupS3BucketName: userConfig.backupS3BucketName
+    backupS3BucketName: userConfig.backupS3BucketName,
+    worldName: userConfig.worldName,
+    existingBucket: userConfig.existingBucket
 });
 
 interface iUserConfig {
     keyPairName: string;
     instanceClass: InstanceClass;
     instanceSize: InstanceSize;
-    backupS3BucketName: string;
     worldName: string;
+    backupS3BucketName: string;
+    existingBucket?: boolean;
 }
