@@ -66,6 +66,7 @@ You will not need to install any tools using CloudShell. :D
   * You will need the key/pair when you setting up your local aws settings via `aws configure`
 * Configured local `aws` CLI by running `aws configure`
 * Clone this repository
+* Copy `user-config.json.template` as `user-config.json` (i.e. `cp ./user-config.json.template ./user-config.json`)
 * Edit `user-config.json` to your preferences
   * Change to your liking
   * keyPairName is the name of the KeyPair created above
@@ -105,6 +106,7 @@ If you run into performance/CPU bottle necks try upping the instance class (`t3`
 Note: `cdk bootstrap` **must** be ran once on the AWS Account so assets can be properly deployed using the CDK toolkit stack.
 
 * `make init`
+* Make a copy of `user-config.json.template` as `user-config.json` within the same directory
 * Edit `user-config.json` with your preferences!
 * `make deploy` - run as many times as you want per code or config changes
 * Hit the `y` key to accept the changes
