@@ -16,3 +16,5 @@ assets/stop_backup_start.sh
 .cdk.staging
 cdk.out
 
+user-config.json
+
