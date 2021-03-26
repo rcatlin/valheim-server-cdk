@@ -80,7 +80,7 @@ export class ValheimServerCdkStack extends cdk.Stack {
     /* CloudFormation Initialization */
     let restoreFromS3Command;
     if (props.existingBucket) {
-      const src = path.join('s3://', props.backupS3BucketName, '/'),
+      const src = 's3://' + path.join(props.backupS3BucketName, '/'),
         dest = path.join(USER_VIKING_WORLDS_FOLDER_PATH, '/');
       restoreFromS3Command = InitCommand.argvCommand([
         'aws',
