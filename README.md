@@ -1,6 +1,6 @@
-# Valhdiem Server with CDK
+# Valhiem Server with CDK
 
-An "easy" way to setup the infrastructure and a running valheim server (with manual backup capabilities) on AWS!
+An "easy" way to setup the infrastructure and a running Valheim server (with manual backup capabilities) on AWS!
 
 # DISCLAIMER
 
@@ -168,6 +168,10 @@ Server stacks running a single EC2 instance are identified by the unique `worldN
 Different world names will cause unique stack to be created.
 
 I would recommend recloning this repository with a newly modified user config to launch additional servers on the same AWS account+region.
+
+# Github Actions
+
+Anyone added as a collaborator can trigger github actions. The update and backup github actions are set to :workflow_dispatch, and can be triggered manually or also by a POST request to the action route, with proper authentication.
 
 # Possible Future Improvements (if odin wills)
 
