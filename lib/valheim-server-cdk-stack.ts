@@ -25,6 +25,7 @@ import {
   SubnetType,
   Vpc
 } from '@aws-cdk/aws-ec2';
+import { ManagedPolicy } from '@aws-cdk/aws-iam';
 import * as s3 from '@aws-cdk/aws-s3';
 
 const USER_VIKING_WORLDS_FOLDER_PATH = '/home/viking/.config/unity3d/IronGate/Valheim/worlds/';
@@ -187,6 +188,7 @@ export class ValheimServerCdkStack extends cdk.Stack {
       vpcSubnets: { subnetType: SubnetType.PUBLIC },
       keyName: props.keyPairName
     });
+    instance.role.addManagedPolicy(ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMFullAccess'));
 
     /* Elastic IP Address */
     const eip = new CfnEIP(this ,'Server IP');
