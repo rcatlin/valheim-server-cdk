@@ -5,5 +5,6 @@
     "keyPairName": "ENTER-YOUR-KEYPAIR-HERE",
     "instanceClass": "t2",
     "instanceSize": "medium",
-    "backupS3BucketName": "ENTER-YOUR-UNIQUE-BACKUP-BUCKET-NAME-HERE"
+    "backupS3BucketName": "ENTER-YOUR-UNIQUE-BACKUP-BUCKET-NAME-HERE",
+    "enableConsole": false
 }
