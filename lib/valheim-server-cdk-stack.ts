@@ -96,7 +96,7 @@ export class ValheimServerCdkStack extends cdk.Stack {
         '--recursive'
       ]);
     } else {
-      restoreFromS3Command = InitCommand.argvCommand(['echo "World file restoration skipped: new bucket."']);
+      restoreFromS3Command = InitCommand.argvCommand(['echo', '"World file restoration skipped: new bucket."']);
     }
 
     const init = CloudFormationInit.fromConfigSets({
