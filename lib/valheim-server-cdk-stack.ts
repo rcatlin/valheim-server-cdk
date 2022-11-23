@@ -99,6 +99,23 @@ export class ValheimServerCdkStack extends cdk.Stack {
       restoreFromS3Command = InitCommand.argvCommand(['echo', '"World file restoration skipped: new bucket."']);
     }
 
+    // "steamcmd" arguments and optionally include beta args (MISTLANDS!)
+    let steamcmdArgs = [
+      '/home/viking/Steam/steamcmd.sh',
+      '+login',
+      'anonymous',
+      '+force_install_dir',
+      '/home/viking/valheimserver',
+      '+app_update',
+      '896660',
+      'validate',
+      '+exit'
+    ];
+
+    if (props.betaName && props.betaPassword) {
+      steamcmdArgs = steamcmdArgs.concat('-beta', props.betaName, '-betapassword', props.betaPassword);)
+    }
+
     const init = CloudFormationInit.fromConfigSets({
       configSets: {
         default: ['yumPreinstall', 'config']
@@ -130,18 +147,8 @@ export class ValheimServerCdkStack extends cdk.Stack {
           // Download lastest SteamCMD
           InitSource.fromUrl('/home/viking/Steam/', 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz'),
 
-          // Install Valheim Server using SteamCMD
-          InitCommand.argvCommand([
-            '/home/viking/Steam/steamcmd.sh',
-            '+login',
-            'anonymous',
-            '+force_install_dir',
-            '/home/viking/valheimserver',
-            '+app_update',
-            '896660',
-            'validate',
-            '+exit'
-          ]),
+          // Install Valheim Server using SteamCMD          
+          InitCommand.argvCommand(steamcmdArgs),
 
           // Copy server start script from assets
           InitCommand.argvCommand(['cp', '/home/viking/assets/custom_start_valheim.sh', '/home/viking/valheimserver/']),
@@ -218,4 +225,6 @@ interface iValheimServerCdkStackProps extends cdk.StackProps {
   backupS3BucketName: string;
   worldName: string;
   existingBucket?: boolean;
+  betaName?: string;
+  betaPassword?: string;
 }
