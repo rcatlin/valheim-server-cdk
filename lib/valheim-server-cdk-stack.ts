@@ -102,19 +102,20 @@ export class ValheimServerCdkStack extends cdk.Stack {
     // "steamcmd" arguments and optionally include beta args (MISTLANDS!)
     let steamcmdArgs = [
       '/home/viking/Steam/steamcmd.sh',
-      '+login',
-      'anonymous',
       '+force_install_dir',
       '/home/viking/valheimserver',
+      '+login',
+      'anonymous',
       '+app_update',
       '896660',
+    ];
+    if (props.betaName && props.betaPassword) {
+      steamcmdArgs = steamcmdArgs.concat('-beta', props.betaName, '-betapassword', props.betaPassword);
+    }
+    steamcmdArgs = steamcmdArgs.concat([
       'validate',
       '+exit'
-    ];
-
-    if (props.betaName && props.betaPassword) {
-      steamcmdArgs = steamcmdArgs.concat('-beta', props.betaName, '-betapassword', props.betaPassword);)
-    }
+    ]);
 
     const init = CloudFormationInit.fromConfigSets({
       configSets: {
