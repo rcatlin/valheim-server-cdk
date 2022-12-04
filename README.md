@@ -14,11 +14,12 @@ Launching EC2 instances in AWS **cost real money** and I am in no way responsibl
 # tl;dr
 
 * have aws account
-* have/add iam role and keypair in aws account
+* have/add iam role and ec2 keypair in aws account
 * have aws cli installed and configured locally
 * checkout code
+* `cp user-config.json.template user-config.json`
+* IMPORTANT: Modify `user-config.json` for your desired server settings!
 * Run initialize: `make init`
-* modify `user-config.json`
 * Run deploy: `make deploy`
 * wait then connect and play
 
